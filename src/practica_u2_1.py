@@ -13,6 +13,7 @@ def comprobar_importe(valor: str) -> bool:
     Returns:
         bool: True si el valor es un número válido (positivo, negativo o con punto decimal), False en caso contrario.
     """
+    valor = float(input(""))
     if valor.isdigit():
         return True
     else:
@@ -29,7 +30,8 @@ def comprobar_comando(comando: str) -> bool:
     Returns:
         bool: True si el comando está en la lista de comandos válidos, False en caso contrario.
     """
-    if (comando != "compra" or comando != "venta" or comando != "saldo" or comando != "reset" or comando != "fin"):
+    comando = input("> ")
+    if comando is not ("compra" or "venta" or "saldo" or "reset" or "fin"):
         return False
     else:
         return True
@@ -39,7 +41,7 @@ def mostrar_mensaje_error():
     """
     Muestra el mensaje de error por entrada inválida.
     """
-    return input("*ERROR* Entrada inválida")
+    return print("*ERROR* Entrada inválida")
 
 
 def procesar_compra(saldo: float, importe: float) -> float:
@@ -97,11 +99,12 @@ def resetear_saldo(saldo: float, cont_compras: int, cont_ventas: int) -> tuple[f
     print(saldo, cont_compras, cont_ventas)
     return 0, 0, 0
 
+
 def encuentra_fin():
     """
     Esta función la he creado porque no he visto ninguna que trate sobre introducir "fin" y acabe el programa.
     """
-    return 0
+    return ""
     
 
 def recuperar_comando_e_importe(linea: str) -> tuple[str, str]:
@@ -173,7 +176,8 @@ def main():
     cont_compras = 0
     cont_ventas = 0
     saldo = 0
-
+    linea = "E"
+    
     while not encuentra_fin():
 
         comando, importe = recuperar_comando_e_importe(linea)
@@ -181,7 +185,7 @@ def main():
         if comando is None or not comprobar_comando(comando):
             mostrar_mensaje_error()
         elif comando in ("saldo", "reset", "fin") and importe is not None:
-            
+            print("")
         elif comando == "saldo":
             mostrar_saldo()
         elif comando == "reset":
@@ -191,11 +195,10 @@ def main():
         elif importe is None or not comprobar_importe(importe):
             mostrar_mensaje_error()
         else:
-
             if comando == "compra":
-                procesar_compra
+                procesar_compra()
             elif comando == "venta":
-                procesar_venta
+                procesar_venta()
 
             
 if __name__ == "__main__":

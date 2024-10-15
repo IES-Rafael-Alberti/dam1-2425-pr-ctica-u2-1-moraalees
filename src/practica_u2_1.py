@@ -176,7 +176,6 @@ def main():
     cont_compras = 0
     cont_ventas = 0
     saldo = 0
-    linea = "E"
     
     while not encuentra_fin():
 
